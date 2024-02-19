@@ -78,20 +78,6 @@ impl Vec4 {
         Vec4 { x, y, z, w }
     }
 
-    pub fn magnitude(&self) -> f64 {
-        (self.x.powi(2) + self.y.powi(2) + self.z.powi(2) + self.w.powi(2)).sqrt()
-    }
-
-    pub fn normalize(&self) -> Vec4 {
-        let mag = self.magnitude();
-        Vec4 {
-            x: self.x / mag,
-            y: self.y / mag,
-            z: self.z / mag,
-            w: self.w / mag,
-        }
-    }
-
     pub fn to_vec3(&self) -> Vec3 {
         Vec3 {
             x: self.x,
@@ -148,26 +134,6 @@ impl ops::Div<f64> for Vec2 {
 impl Vec2 {
     pub fn new(x: f64, y: f64) -> Vec2 {
         Vec2 { x, y }
-    }
-
-    pub fn magnitude(&self) -> f64 {
-        (self.x.powi(2) + self.y.powi(2)).sqrt()
-    }
-
-    pub fn normalize(&self) -> Vec2 {
-        let mag = self.magnitude();
-        Vec2 {
-            x: self.x / mag,
-            y: self.y / mag,
-        }
-    }
-
-    pub fn to_vec3(&self) -> Vec3 {
-        Vec3 {
-            x: self.x,
-            y: self.y,
-            z: 0.0,
-        }
     }
 
     pub fn xyy(&self) -> Vec3 {
@@ -249,19 +215,15 @@ impl Vec3 {
         }
     }
 
-    pub fn to_vec2(&self) -> Vec2 {
-        Vec2 {
-            x: self.x,
-            y: self.y,
-        }
-    }
+    // pub fn abs(&self) -> Vec3 {
+    //     Vec3 {
+    //         x: self.x.abs(),
+    //         y: self.y.abs(),
+    //         z: self.z.abs(),
+    //     }
+    // }
 
-    pub fn to_vec4(&self) -> Vec4 {
-        Vec4 {
-            x: self.x,
-            y: self.y,
-            z: self.z,
-            w: 0.0,
-        }
+    pub fn dot(&self, v: Vec3) -> f64 {
+        self.x * v.x + self.y * v.y + self.z * v.z
     }
 }
